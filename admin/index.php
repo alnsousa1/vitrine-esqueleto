@@ -1,11 +1,13 @@
 <?php
-    //preciso pegar a variavel $pdo para conseguir rodar o SELECT no login.php
-    require "../config.php"
+//preciso pegar a variavel $pdo para conseguir rodar o SELECT no login.php
+session_start();
+require "../config.php"
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,11 +31,11 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    
+
 
     <!-- Outros Javascript -->
     <script src="js/parsley.min.js"></script>
-    
+
     <script src="js/jquery.inputmask.min.js"></script>
     <script src="js/bindings/inputmask.binding.js"></script>
     <script src="js/jquery.maskMoney.min.js"></script>
@@ -44,9 +46,7 @@
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -55,14 +55,43 @@
 
     <link rel="stylesheet" type="text/css" href="vendor/summernote/summernote.min.css">
     <link rel="stylesheet" type="text/css" href="vendor/summernote/summernote-bs4.min.css">
-    <link rel="stylesheet" href="css/sweetalert2.min.css"></script>
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+    </script>
 </head>
+
 <body id="page-top">
     <?php
-        require "funcoes.php";
+    require "funcoes.php";
 
+    if (!isset($_SESSION["usuario"])) {
         require "paginas/login.php";
+    }else{
+        if(isset($_GET["param"])) {
+            $page = explode("/", $_GET["param"]);
+            //explode quebra a barra de paginas/home, por exemplo, e adiciona a paginas e home um em cada indice de um array
+
+            $pasta = $page[0] ?? NULL;
+            $pagina = $page[1] ?? NULL;
+            $id = $page[2] ?? NULL;
+
+            $page = "{$pasta}/{$pagina}";
+            //no código acima estou montando os parametros que foram dividos quando usei o EXPLODE
+        }
+
+        require "header.php";
+        if(file_exists("{$page}.php")){
+            require "{$page}.php";
+        }else {
+            require "paginas/erro.php";
+        }
+
+        require "footer.php";
+        
+
+    }
+
     ?>
-    
+
 </body>
+
 </html>

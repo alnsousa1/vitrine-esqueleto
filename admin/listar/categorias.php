@@ -15,8 +15,6 @@
                 $consulta->execute();
 
                 while ($dados = $consulta->fetch(PDO::FETCH_OBJ)) {
-                    $id = $dados->id;
-                    $nome = $dados->nome;
                     ?>
                         <tbody>
                             <tr>

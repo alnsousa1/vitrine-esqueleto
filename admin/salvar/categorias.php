@@ -13,6 +13,7 @@ if ($_POST) {
     }
 
     //fazendo um select para retornar o id, quando o nome for igual o nome guardado na variável $nome e for diferente do id guardado na variável $id
+    //  <> significa DIFERENÇA
     $sql = "select id from categoria where nome = :nome and id <> :id";
 
     //criando uma várivel $consulta e dizendo que ela recebe a variável $pdo, que guarda a conexão com o banco de dados, e faz ela preparar o $sql para ser interpretado pelo php
@@ -52,7 +53,8 @@ if ($_POST) {
             mensagemErro("Não foi possível salvar os dados.");
         }
         //redireciona para um arquivo chamado "categorias", dentro da pasta "listas"
-        echo "<script>location.href='listas/categorias'</script>";
+        // echo "<script>location.href='listas/categorias'</script>";
+        require "listar/categorias.php";
         exit;
 }
 

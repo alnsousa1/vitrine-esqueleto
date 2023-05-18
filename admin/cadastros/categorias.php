@@ -1,17 +1,7 @@
-<!-- formulario com campo id, nome e botao -->
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
 <?php
+
+    $nome = NULL;
+
     if (!empty($id)){
         //consulta no banco de dados
         $sql = "select * from categoria where id = :id";
@@ -19,7 +9,7 @@
         $consulta->bindParam(":id", $id);
         $consulta->execute();
 
-        $dados = $consulta->fetchAll(PDO::FETCH_OBJ);
+        $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
         $id = $dados->id ?? NULL;
         $nome = $dados->nome ?? NULL;
@@ -43,12 +33,9 @@
                 <input type="text" name="id" id="id" class="form-control" readonly value="<?=$id?>" placeholder="Digite o id:">
 
                 <label for="nome">Nome da Categoria</label>
-                <input type="text" name="nome" id="nome" class="form-control" required value="" placeholder="Digite o nome:">
+                <input type="text" name="nome" id="nome" class="form-control" required value="<?=$nome?>" placeholder="Digite o nome:">
                 <br>
                 <button type="submit" class="btn btn-success">Salvar Dados</button>
             </form>
         </div>
     </div>
-</body>
-
-</html>

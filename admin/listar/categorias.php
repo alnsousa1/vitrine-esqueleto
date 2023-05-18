@@ -22,7 +22,7 @@
                                 <td><?=$dados->nome ?></td>
                                 <td>
                                     <a href="cadastros/categorias/<?=$dados->id?>" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                    <a href="cadastros/categorias/<?=$dados->id?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="javascript:excluir(<?=$dados->id?>)" class="btn btn-danger" id="delete"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -32,3 +32,17 @@
         </table>
     </div>
 </div>
+<script>
+    function excluir(id){
+        Swal.fire({
+            title: 'Deseja excluir permanentemente este item?',
+            showCancelButton: true,
+            confirmButtonText: 'Excluir',
+            showCancelButton: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed){
+                location.href='excluir/categorias/'+id;
+            }
+        });
+    }
+</script>

@@ -54,7 +54,7 @@ if ($_POST) {
         }
         //redireciona para um arquivo chamado "categorias", dentro da pasta "listas"
         // echo "<script>location.href='listas/categorias'</script>";
-        require "listar/categorias.php";
+        echo "<script>location.href='listar/categorias'</script>";
         exit;
 }
 

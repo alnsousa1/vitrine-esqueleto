@@ -22,5 +22,6 @@
     if($consulta->execute()){
         echo "<script>location.href='listar/categorias'</script>";
         exit;
+        
     }
 ?>
